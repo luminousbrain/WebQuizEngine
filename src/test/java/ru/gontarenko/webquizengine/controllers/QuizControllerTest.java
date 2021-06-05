@@ -13,9 +13,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import ru.gontarenko.webquizengine.entities.Quiz;
 import ru.gontarenko.webquizengine.services.QuizService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -38,9 +36,9 @@ public class QuizControllerTest {
 
     @BeforeAll
     public static void createTestQuizzes() {
-        testQuiz1 = new Quiz("The Java Logo", "What is depicted on the Java logo?", List.of("Robot", "Tea leaf", "Cup of coffee", "Bug"), 2);
+        testQuiz1 = new Quiz("The Java Logo", "What is depicted on the Java logo?", List.of("Robot", "Tea leaf", "Cup of coffee", "Bug"), Set.of(2));
         testQuiz1.setId(1);
-        testQuiz2 = new Quiz("Java older than C#", "Java older than C#?", List.of("yes", "no"), 0);
+        testQuiz2 = new Quiz("Java older than C#", "Java older than C#?", List.of("yes", "no"), Set.of(0));
         testQuiz2.setId(2);
     }
 

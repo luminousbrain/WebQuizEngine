@@ -3,11 +3,12 @@ package ru.gontarenko.webquizengine.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ru.gontarenko.webquizengine.entities.Answer;
 import ru.gontarenko.webquizengine.entities.Quiz;
 import ru.gontarenko.webquizengine.services.QuizService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +22,7 @@ public class QuizController {
         this.quizService = quizService;
     }
 
-
+    // todo Попробовать без objectMapper.writeValueAsString
     @GetMapping("/quizzes")
     public String getAllQuizzes() {
         try {
@@ -29,7 +30,18 @@ public class QuizController {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        throw new QuizNotFoundException();
+        return "server error";
+    }
+
+    @PostMapping(value = "/quizzes")
+    public String createQuiz(@RequestBody @Valid Quiz quiz) {
+        quizService.save(quiz);
+        try {
+            return objectMapper.writeValueAsString(quiz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return "server error";
     }
 
     @GetMapping("/quizzes/{id}")
@@ -46,30 +58,16 @@ public class QuizController {
     }
 
     @PostMapping("/quizzes/{id}/solve")
-    public String solveQuizById(@PathVariable int id, @RequestParam int answer) {
+    public String solveQuizById(@PathVariable int id, @RequestBody Answer answer) {
         Optional<Quiz> quizToSolve = quizService.findById(id);
         if (quizToSolve.isEmpty()) {
             throw new QuizNotFoundException();
         }
         Quiz quiz = quizToSolve.get();
-        if (quiz.checkAnswer(answer)) {
+        if (quiz.checkAnswer(answer.getAnswer())) {
             return "{\"success\":true,\"feedback\":\"Congratulations, you're right!\"}";
         } else {
             return "{\"success\":false,\"feedback\":\"Wrong answer! Please, try again.\"}";
         }
-    }
-
-    @PostMapping(value = "/quizzes", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String createQuiz(@RequestBody Quiz quiz) {
-        if (quiz == null) {
-            return ""; // ???
-        }
-        quizService.save(quiz);
-        try {
-            return objectMapper.writeValueAsString(quiz);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return "server error";
     }
 }
