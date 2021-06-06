@@ -1,21 +1,42 @@
 package ru.gontarenko.webquizengine.entities;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "quiz_table")
+@TypeDef(name = "list", typeClass = ArrayList.class)
+@TypeDef(name = "set", typeClass = HashSet.class)
 public class Quiz {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @NotBlank
+    @Column(name = "title")
     private String title;
+
     @NotBlank(message = "Must be not empty")
+    @Column(name = "text")
     private String text;
+
     @Size(min = 2)
     @NotNull
+    @Column(name = "options")
+    @Type(type = "list")
     private List<String> options;
+
+    @Column(name = "answer")
+    @Type(type = "set")
     private Set<Integer> answer;
 
     public Quiz() {}

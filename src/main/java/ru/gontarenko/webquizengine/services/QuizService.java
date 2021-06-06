@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface QuizService {
     Optional<Quiz> findById(int id);
-    Collection<Quiz> findAll(); // todo: test List ???
+    Collection<Quiz> findAll();
     void save(Quiz quiz);
 }

@@ -3,6 +3,7 @@ package ru.gontarenko.webquizengine.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import ru.gontarenko.webquizengine.entities.Answer;
 import ru.gontarenko.webquizengine.entities.Quiz;
@@ -18,7 +19,7 @@ public class QuizController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    public QuizController(QuizService quizService) {
+    public QuizController(@Qualifier("quizServiceImpl") QuizService quizService) {
         this.quizService = quizService;
     }
 

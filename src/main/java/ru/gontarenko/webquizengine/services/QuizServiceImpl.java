@@ -1,38 +1,46 @@
 package ru.gontarenko.webquizengine.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.gontarenko.webquizengine.entities.Quiz;
+import ru.gontarenko.webquizengine.repos.QuizRepository;
 
-import java.util.*;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.Collection;
+import java.util.Optional;
 
 @Service
-public class QuizServiceImpl implements QuizService  {
+public class QuizServiceImpl implements QuizService {
+    private final QuizRepository quizRepository;
 
-    private Map<Integer, Quiz> quizMap; // tmp database
+    @PostConstruct
+    public void init() {
+        System.out.println("QuizServiceImpl was created!");
+    }
 
-    public QuizServiceImpl() {
-        this.quizMap = new LinkedHashMap<>();
+    @PreDestroy
+    public void destroy() {
+        System.out.println("QuizServiceImpl was destroy!");
+    }
+
+    @Autowired
+    public QuizServiceImpl(QuizRepository quizRepository) {
+        this.quizRepository = quizRepository;
     }
 
     @Override
     public Optional<Quiz> findById(int id) {
-        Quiz quiz = quizMap.get(id);
-        return quiz == null ? Optional.empty() : Optional.of(quiz);
+        return quizRepository.findById(id);
     }
 
     @Override
     public Collection<Quiz> findAll() {
-        return quizMap.values();
+        return (Collection<Quiz>) quizRepository.findAll();
     }
-
-//    @Override
-//    public List<Quiz> findAll() {
-//        return new ArrayList<>(quizMap.values());
-//    }
 
     @Override
     public void save(Quiz quiz) {
-        quiz.setId(quizMap.size() + 1);
-        quizMap.put(quiz.getId(), quiz);
+        quizRepository.save(quiz);
     }
 }
