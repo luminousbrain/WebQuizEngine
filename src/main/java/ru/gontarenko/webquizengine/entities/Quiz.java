@@ -1,5 +1,6 @@
 package ru.gontarenko.webquizengine.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -38,6 +39,11 @@ public class Quiz {
     @Column(name = "answer")
     @Type(type = "set")
     private Set<Integer> answer;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Quiz() {}
 
@@ -88,6 +94,14 @@ public class Quiz {
         this.answer = this.answer == null ? new HashSet<>() : this.answer;
         answer = answer == null ? new HashSet<>() : answer;
         return answer.containsAll(this.answer) && answer.size() == this.answer.size();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

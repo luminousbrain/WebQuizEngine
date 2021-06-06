@@ -1,12 +1,15 @@
-package ru.gontarenko.webquizengine.services;
+package ru.gontarenko.webquizengine.services.impl;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.gontarenko.webquizengine.entities.Quiz;
+import ru.gontarenko.webquizengine.services.QuizService;
 
+import java.security.Principal;
 import java.util.*;
 
 @Service
-public class QuizServiceWithNoDbImpl implements QuizService  {
+public class QuizServiceWithNoDbImpl implements QuizService {
     private Map<Integer, Quiz> quizMap; // tmp database
 
     public QuizServiceWithNoDbImpl() {
@@ -28,5 +31,10 @@ public class QuizServiceWithNoDbImpl implements QuizService  {
     public void save(Quiz quiz) {
         quiz.setId(quizMap.size() + 1);
         quizMap.put(quiz.getId(), quiz);
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteById(int id, Principal principal) {
+        return null;
     }
 }
