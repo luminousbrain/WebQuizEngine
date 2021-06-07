@@ -17,21 +17,21 @@ import java.util.Set;
 @Table(name = "quiz_table")
 @TypeDef(name = "list", typeClass = ArrayList.class)
 @TypeDef(name = "set", typeClass = HashSet.class)
-public class Quiz {
+public final class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Title is required")
     @Column(name = "title")
     private String title;
 
-    @NotBlank(message = "Must be not empty")
+    @NotBlank(message = "Text is required")
     @Column(name = "text")
     private String text;
 
-    @Size(min = 2)
-    @NotNull
+    @Size(min = 2, message = "Must be at least two options")
+    @NotNull(message = "Options is required")
     @Column(name = "options")
     @Type(type = "list")
     private List<String> options;
@@ -54,12 +54,12 @@ public class Quiz {
         this.answer = answer;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
-    public int getId() {
-        return id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -2,7 +2,7 @@ package ru.gontarenko.webquizengine.entities;
 
 import java.util.Set;
 
-public class Answer {
+public final class Answer {
     private Set<Integer> answer;
 
     public Set<Integer> getAnswer() {

@@ -3,7 +3,7 @@ package ru.gontarenko.webquizengine.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.gontarenko.webquizengine.controllers.UserException;
+import ru.gontarenko.webquizengine.exceptions.UserException;
 import ru.gontarenko.webquizengine.entities.User;
 import ru.gontarenko.webquizengine.repos.UserRepository;
 import ru.gontarenko.webquizengine.services.UserService;
@@ -13,9 +13,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class UserServiceImpl implements UserService {
+public final class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    public final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -42,9 +43,7 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
-    public boolean validate(String emailStr) {
+    private boolean validate(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
     }

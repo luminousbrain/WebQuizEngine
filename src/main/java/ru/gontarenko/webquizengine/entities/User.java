@@ -1,34 +1,29 @@
 package ru.gontarenko.webquizengine.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "user_table")
-public class User {
+public final class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Email
     @Column(name = "email")
     private String email;
 
-    @Size(min = 5)
+    @NotEmpty(message = "Password is required")
+    @Size(min = 5, message = "At least 5 characters are required")
     @Column(name = "password")
     private String password;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Quiz> quizList;
-
     public User() {}
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -48,13 +43,6 @@ public class User {
         this.password = password;
     }
 
-    public List<Quiz> getQuizList() {
-        return quizList;
-    }
-
-    public void setQuizList(List<Quiz> quizList) {
-        this.quizList = quizList;
-    }
 
     @Override
     public String toString() {
@@ -62,7 +50,6 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", quizList=" + quizList +
                 '}';
     }
 }

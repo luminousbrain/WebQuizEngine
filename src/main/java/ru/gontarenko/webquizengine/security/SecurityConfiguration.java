@@ -28,15 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/actuator/shutdown").permitAll()
-//                .antMatchers("/api/quizzes/**").hasAuthority(Permission.USER.toString())
-//                .anyRequest()
-//                .authenticated()
-//                .and().headers().frameOptions().disable();
-        http
-                .csrf().disable()
+        http.csrf().disable()
                 .httpBasic()
                 .and()
                 .authorizeRequests()
