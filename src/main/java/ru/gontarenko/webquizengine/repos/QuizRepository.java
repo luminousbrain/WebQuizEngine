@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.gontarenko.webquizengine.entities.Quiz;
 
 @Repository
-public interface QuizRepository extends JpaRepository<Quiz, Long> {}
+public interface QuizRepository extends JpaRepository<Quiz, Long> {
+
+}

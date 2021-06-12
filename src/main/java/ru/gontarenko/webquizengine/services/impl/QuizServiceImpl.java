@@ -63,7 +63,6 @@ public final class QuizServiceImpl implements QuizService {
 
     @Override
     public ResponseEntity<Void> deleteById(Long id, User user) {
-        // TODO: 07.06.2021 Заменить ResponseEntity на кастомные Exception???
         Optional<Quiz> byId = quizRepository.findById(id);
         if (byId.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

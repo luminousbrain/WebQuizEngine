@@ -1,6 +1,8 @@
 package ru.gontarenko.webquizengine.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,17 +21,12 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/actuator/shutdown")
-    public String forTest() {
-        return "";
-    }
-
     @PostMapping("/api/register")
-    public String register(@RequestBody @Valid User user) {
+    public ResponseEntity<?> register(@RequestBody @Valid User user) {
         boolean save = userService.save(user);
         if (!save) {
             throw new UserException();
         }
-        return ""; // STATUS 200 ???
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }
