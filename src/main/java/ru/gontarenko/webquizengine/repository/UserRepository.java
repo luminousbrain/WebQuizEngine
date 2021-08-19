@@ -1,8 +1,8 @@
-package ru.gontarenko.webquizengine.repos;
+package ru.gontarenko.webquizengine.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.gontarenko.webquizengine.entities.User;
+import ru.gontarenko.webquizengine.entity.User;
 
 import java.util.Optional;
 

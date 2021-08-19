@@ -1,11 +1,11 @@
-package ru.gontarenko.webquizengine.services;
+package ru.gontarenko.webquizengine.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import ru.gontarenko.webquizengine.entities.Answer;
-import ru.gontarenko.webquizengine.entities.CompletedQuiz;
-import ru.gontarenko.webquizengine.entities.Quiz;
-import ru.gontarenko.webquizengine.entities.User;
+import ru.gontarenko.webquizengine.entity.Answer;
+import ru.gontarenko.webquizengine.entity.CompletedQuiz;
+import ru.gontarenko.webquizengine.entity.Quiz;
+import ru.gontarenko.webquizengine.entity.User;
 
 import java.util.Optional;
 

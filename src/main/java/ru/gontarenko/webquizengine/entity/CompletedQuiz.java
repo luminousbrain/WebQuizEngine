@@ -1,4 +1,4 @@
-package ru.gontarenko.webquizengine.entities;
+package ru.gontarenko.webquizengine.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

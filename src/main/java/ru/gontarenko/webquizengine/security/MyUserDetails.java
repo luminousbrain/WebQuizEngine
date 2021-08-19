@@ -4,7 +4,7 @@ package ru.gontarenko.webquizengine.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.gontarenko.webquizengine.entities.User;
+import ru.gontarenko.webquizengine.entity.User;
 
 import java.util.Collection;
 import java.util.List;

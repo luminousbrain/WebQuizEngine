@@ -1,8 +1,8 @@
-package ru.gontarenko.webquizengine.repos;
+package ru.gontarenko.webquizengine.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.gontarenko.webquizengine.entities.Quiz;
+import ru.gontarenko.webquizengine.entity.Quiz;
 
 @Repository
 public interface QuizRepository extends JpaRepository<Quiz, Long> {

@@ -1,12 +1,12 @@
-package ru.gontarenko.webquizengine.services.impl;
+package ru.gontarenko.webquizengine.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.gontarenko.webquizengine.exceptions.UserException;
-import ru.gontarenko.webquizengine.entities.User;
-import ru.gontarenko.webquizengine.repos.UserRepository;
-import ru.gontarenko.webquizengine.services.UserService;
+import ru.gontarenko.webquizengine.exception.UserException;
+import ru.gontarenko.webquizengine.entity.User;
+import ru.gontarenko.webquizengine.repository.UserRepository;
+import ru.gontarenko.webquizengine.service.UserService;
 
 import java.util.Optional;
 import java.util.regex.Matcher;

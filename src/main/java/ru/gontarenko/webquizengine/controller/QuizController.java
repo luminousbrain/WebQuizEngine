@@ -1,16 +1,16 @@
-package ru.gontarenko.webquizengine.controllers;
+package ru.gontarenko.webquizengine.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.gontarenko.webquizengine.entities.Answer;
-import ru.gontarenko.webquizengine.entities.CompletedQuiz;
-import ru.gontarenko.webquizengine.entities.Quiz;
-import ru.gontarenko.webquizengine.exceptions.QuizNotFoundException;
-import ru.gontarenko.webquizengine.services.QuizService;
-import ru.gontarenko.webquizengine.services.UserService;
+import ru.gontarenko.webquizengine.entity.Answer;
+import ru.gontarenko.webquizengine.entity.CompletedQuiz;
+import ru.gontarenko.webquizengine.entity.Quiz;
+import ru.gontarenko.webquizengine.exception.QuizNotFoundException;
+import ru.gontarenko.webquizengine.service.QuizService;
+import ru.gontarenko.webquizengine.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -23,8 +23,10 @@ public class QuizController {
     private final UserService userService;
 
     @Autowired
-    public QuizController(@Qualifier("quizServiceImpl") QuizService quizService,
-                          UserService userService) {
+    public QuizController(
+            @Qualifier("quizServiceImpl") QuizService quizService,
+            UserService userService
+    ) {
         this.quizService = quizService;
         this.userService = userService;
     }
@@ -75,11 +77,11 @@ public class QuizController {
     @PostMapping("/{id}/solve")
     public String solveQuizById(@PathVariable Long id, @RequestBody Answer answer, Principal principal) {
         Optional<Quiz> quizToSolve = quizService.findById(id);
-        if (quizToSolve.isEmpty()) {
-            throw new QuizNotFoundException();
-        }
+        Quiz quiz = quizToSolve.orElseThrow(
+                QuizNotFoundException::new
+        );
         return quizService.solveQuiz(
-                quizToSolve.get(),
+                quiz,
                 answer,
                 userService.findByEmail(principal.getName())
         );

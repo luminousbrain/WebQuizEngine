@@ -1,4 +1,4 @@
-package ru.gontarenko.webquizengine.controllers;
+package ru.gontarenko.webquizengine.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.gontarenko.webquizengine.entities.User;
-import ru.gontarenko.webquizengine.exceptions.UserException;
-import ru.gontarenko.webquizengine.services.UserService;
+import ru.gontarenko.webquizengine.entity.User;
+import ru.gontarenko.webquizengine.exception.UserException;
+import ru.gontarenko.webquizengine.service.UserService;
 
 import javax.validation.Valid;
 

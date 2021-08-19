@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.gontarenko.webquizengine.entities.User;
-import ru.gontarenko.webquizengine.repos.UserRepository;
+import ru.gontarenko.webquizengine.entity.User;
+import ru.gontarenko.webquizengine.repository.UserRepository;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {

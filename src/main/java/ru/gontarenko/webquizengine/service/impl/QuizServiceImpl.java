@@ -1,4 +1,4 @@
-package ru.gontarenko.webquizengine.services.impl;
+package ru.gontarenko.webquizengine.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,13 +7,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.gontarenko.webquizengine.entities.Answer;
-import ru.gontarenko.webquizengine.entities.CompletedQuiz;
-import ru.gontarenko.webquizengine.entities.Quiz;
-import ru.gontarenko.webquizengine.entities.User;
-import ru.gontarenko.webquizengine.repos.CompletedQuizRepository;
-import ru.gontarenko.webquizengine.repos.QuizRepository;
-import ru.gontarenko.webquizengine.services.QuizService;
+import ru.gontarenko.webquizengine.entity.Answer;
+import ru.gontarenko.webquizengine.entity.CompletedQuiz;
+import ru.gontarenko.webquizengine.entity.Quiz;
+import ru.gontarenko.webquizengine.entity.User;
+import ru.gontarenko.webquizengine.repository.CompletedQuizRepository;
+import ru.gontarenko.webquizengine.repository.QuizRepository;
+import ru.gontarenko.webquizengine.service.QuizService;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
